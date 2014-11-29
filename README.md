@@ -6,7 +6,7 @@
 
 + [S](https://github.com/magnars/s.el)
 
-## installation
+## Installation
 
 Download `pelican-mode.el` and add the following to your init file:
 
