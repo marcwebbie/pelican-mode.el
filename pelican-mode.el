@@ -155,6 +155,11 @@ string or 't to use the current date and time."
   (interactive)
   (pelican-make "publish"))
 
+(defun pelican-make-serve ()
+  "Serve content locally via a Makefile at the root of the site."
+  (interactive)
+  (pelican-make "serve"))
+
 (defun pelican-make (target)
   "Execute TARGET in a Makefile at the root of the site."
   (interactive "sMake Pelican target: ")
