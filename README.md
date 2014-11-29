@@ -1,6 +1,6 @@
 # pelican-mode.el
 
-[Pelican](http://getpelican.com) static site generator mode for emacs
+[Pelican](http://docs.getpelican.com/) static site generator mode for emacs
 
 ## Dependencies
 
