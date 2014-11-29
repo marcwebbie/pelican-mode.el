@@ -64,7 +64,9 @@
 
 (defun pelican-open-conf ()
   (interactive)
-  (find-file (pelican-find-conf-path)))
+  (if (pelican-find-root)
+      (find-file (pelican-find-conf-path))
+    (message "Couldn't find pelicanconf.py")))
 
 (defun pelican-open-publishconf ()
   (interactive)
