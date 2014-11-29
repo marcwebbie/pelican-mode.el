@@ -205,12 +205,12 @@ string or 't to use the current date and time."
 
 (defun pelican-mode-off ()
   "Disable `pelican-mode' minor mode."
-  (pelican-mode-mode -1))
+  (pelican-mode -1))
 
 ;;;###autoload
 (defun pelican-mode-on ()
   "Enable `pelican-mode' minor mode if this is a pelican project."
-  (if (pelican-find-root) (pelican-mode-mode +1) (pelican-mode -1)))
+  (if (pelican-find-root) (pelican-mode +1) (pelican-mode -1)))
 
 
 (provide 'pelican-mode)
