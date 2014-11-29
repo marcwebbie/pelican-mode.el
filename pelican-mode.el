@@ -77,6 +77,7 @@
     (message "Couldn't find publishconf.py")))
 
 (defun pelican-conf-var (var)
+  "Return the value of VAR set in pelicanconf.py"
   (let* ((cmd (format "cd %s && python -c '%s = str();from pelicanconf import *; print(%s)'"
                       (pelican-find-root)
                       var
@@ -85,6 +86,7 @@
     (if (equal "" output) nil output)))
 
 (defun pelican-publishconf-var (var)
+  "Return the value of VAR set in publishconf.py"
   (let* ((cmd (format "cd %s && python -c '%s = str();from publishconf import *; print(%s)'"
                       (pelican-find-root)
                       var
