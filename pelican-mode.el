@@ -30,6 +30,14 @@
 ;; Helper functions
 ;; ========================
 
+(defun pelican-find-conf-path ()
+  "Return full path to pelicanconf.py"
+  (expand-file-name "pelicanconf.py" (pelican-find-root)))
+
+(defun pelican-find-publishconf-path ()
+  "Return full path to publishconf.py"
+  (expand-file-name "publishconf.py" (pelican-find-root)))
+
 
 ;; ========================
 ;; Misc functions
