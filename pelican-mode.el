@@ -63,9 +63,11 @@
   (expand-file-name "publishconf.py" (pelican-find-root)))
 
 (defun pelican-open-conf ()
+  (interactive)
   (find-file (pelican-find-conf-path)))
 
 (defun pelican-open-publishconf ()
+  (interactive)
   (find-file (pelican-find-publishconf-path)))
 
 (defun pelican-conf-var (var)
