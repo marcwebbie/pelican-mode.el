@@ -200,7 +200,7 @@ string or 't to use the current date and time."
 
 ;;;###autoload
 (define-minor-mode pelican-mode
-  "Toggle mode"
+  "Toggle pelicanmode"
   :lighter " Pelican")
 
 (provide 'pelican-mode)
