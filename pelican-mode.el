@@ -213,4 +213,15 @@ string or 't to use the current date and time."
   (if (pelican-find-root) (pelican-mode +1) (pelican-mode -1)))
 
 
+;; ========================
+;; auto enabling pelican mode
+;; ========================
+
+(defadvice find-file (after defadvice-pelican-find-file (filename &optional wildcards) activate)
+  (pelican-mode-on))
+
+(if (fboundp 'ido-find-file)
+    (defadvice ido-find-file (after defadvice-pelican-ido-find-file activate)
+      (pelican-mode-on)))
+
 (provide 'pelican-mode)
