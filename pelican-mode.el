@@ -155,6 +155,18 @@ string or 't to use the current date and time."
   (interactive)
   (pelican-make "html"))
 
+(defun pelican-make (target)
+  "Execute TARGET in a Makefile at the root of the site."
+  (interactive "sMake Pelican target: ")
+  (let ((default-directory (pelican-find-root)))
+    (if default-directory
+        (let ((output (get-buffer-create "*Pelican Output*")))
+          (display-buffer output)
+          (pop-to-buffer output)
+          (compilation-mode)
+          (start-process "Pelican Makefile" output "make" target))
+      (message "This doesn't look like a Pelican site."))))
+
 
 ;; ========================
 ;; Posts
