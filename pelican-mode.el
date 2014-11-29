@@ -63,12 +63,14 @@
   (expand-file-name "publishconf.py" (pelican-find-root)))
 
 (defun pelican-open-conf ()
+  "Open pelicanconf.py in a new buffer"
   (interactive)
   (if (pelican-find-root)
       (find-file (pelican-find-conf-path))
     (message "Couldn't find pelicanconf.py")))
 
 (defun pelican-open-publishconf ()
+  "Open pelicanconf.py in a new buffer"
   (interactive)
   (if (pelican-find-root)
       (find-file (pelican-find-publishconf-path))
