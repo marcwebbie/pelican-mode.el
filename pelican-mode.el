@@ -160,6 +160,12 @@ string or 't to use the current date and time."
   (interactive)
   (pelican-make "serve"))
 
+(defun pelican-make-generate-serve ()
+  "Generate html and run local server via a Makefile at the root of the site."
+  (interactive)
+  (pelican-make "html")
+  (pelican-make "serve"))
+
 (defun pelican-make (target)
   "Execute TARGET in a Makefile at the root of the site."
   (interactive "sMake Pelican target: ")
