@@ -38,6 +38,12 @@
   "Return full path to publishconf.py"
   (expand-file-name "publishconf.py" (pelican-find-root)))
 
+(defun pelican-open-conf ()
+  (find-file (pelican-find-conf-path)))
+
+(defun pelican-open-publishconf ()
+  (find-file (pelican-find-publishconf-path)))
+
 
 ;; ========================
 ;; Misc functions
