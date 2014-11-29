@@ -151,9 +151,9 @@ string or 't to use the current date and time."
   (pelican-make "html"))
 
 (defun pelican-make-publish ()
-  "Generate HTML via a Makefile at the root of the site."
+  "Generate Publish content via a Makefile at the root of the site."
   (interactive)
-  (pelican-make "html"))
+  (pelican-make "publish"))
 
 (defun pelican-make (target)
   "Execute TARGET in a Makefile at the root of the site."
