@@ -70,7 +70,9 @@
 
 (defun pelican-open-publishconf ()
   (interactive)
-  (find-file (pelican-find-publishconf-path)))
+  (if (pelican-find-root)
+      (find-file (pelican-find-publishconf-path))
+    (message "Couldn't find publishconf.py")))
 
 (defun pelican-conf-var (var)
   (let* ((cmd (format "cd %s && python -c '%s = str();from pelicanconf import *; print(%s)'"
