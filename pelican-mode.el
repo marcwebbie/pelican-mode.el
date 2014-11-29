@@ -163,8 +163,9 @@ string or 't to use the current date and time."
 (defun pelican-make-generate-serve ()
   "Generate html and run local server via a Makefile at the root of the site."
   (interactive)
-  (pelican-make "html")
-  (pelican-make "serve"))
+  (progn
+    (pelican-make "html")
+    (pelican-make-serve)))
 
 
 ;; ========================
