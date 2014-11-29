@@ -26,24 +26,6 @@
 
 (require 's)
 
-;; ========================
-;; Helper functions
-;; ========================
-
-(defun pelican-find-conf-path ()
-  "Return full path to pelicanconf.py"
-  (expand-file-name "pelicanconf.py" (pelican-find-root)))
-
-(defun pelican-find-publishconf-path ()
-  "Return full path to publishconf.py"
-  (expand-file-name "publishconf.py" (pelican-find-root)))
-
-(defun pelican-open-conf ()
-  (find-file (pelican-find-conf-path)))
-
-(defun pelican-open-publishconf ()
-  (find-file (pelican-find-publishconf-path)))
-
 
 ;; ========================
 ;; Misc functions
@@ -67,10 +49,50 @@
   (let ((conf (pelican-find-in-parents "pelicanconf.py")))
     (if conf (file-name-directory conf))))
 
+
+;; ========================
+;; Confs functions
+;; ========================
+
+(defun pelican-find-conf-path ()
+  "Return full path to pelicanconf.py"
+  (expand-file-name "pelicanconf.py" (pelican-find-root)))
+
+(defun pelican-find-publishconf-path ()
+  "Return full path to publishconf.py"
+  (expand-file-name "publishconf.py" (pelican-find-root)))
+
+(defun pelican-open-conf ()
+  (find-file (pelican-find-conf-path)))
+
+(defun pelican-open-publishconf ()
+  (find-file (pelican-find-publishconf-path)))
+
+(defun pelican-conf-var (var)
+  (let* ((cmd (format "cd %s && python -c '%s = str();from pelicanconf import *; print(%s)'"
+                      (pelican-find-root)
+                      var
+                      var))
+         (output (string-trim-right (shell-command-to-string cmd))))
+    (if (equal "" output) nil output)))
+
+(defun pelican-publishconf-var (var)
+  (let* ((cmd (format "cd %s && python -c '%s = str();from publishconf import *; print(%s)'"
+                      (pelican-find-root)
+                      var
+                      var))
+         (output (string-trim-right (shell-command-to-string cmd))))
+    (if (equal "" output) nil output)))
+
 (defun pelican-conf-path ()
   "Return pelicanconf.py path"
   (let ((conf (pelican-find-in-parents "pelicanconf.py")))
     (if conf conf)))
+
+
+;; ========================
+;; Content functions
+;; ========================
 
 (defun pelican-field (name value)
   "Helper to format a field NAME and VALUE."
@@ -95,23 +117,6 @@ string or 't to use the current date and time."
                                  (pelican-timestamp-now)))
                 "")))
     (concat title date status tags category slug "\n")))
-
-(defun pelican-conf-var (var)
-  (let* ((cmd (format "cd %s && python -c '%s = str();from pelicanconf import *; print(%s)'"
-                      (pelican-find-root)
-                      var
-                      var))
-         (output (string-trim-right (shell-command-to-string cmd))))
-    (if (equal "" output) nil output)))
-
-(defun pelican-publishconf-var (var)
-  (let* ((cmd (format "cd %s && python -c '%s = str();from publishconf import *; print(%s)'"
-                      (pelican-find-root)
-                      var
-                      var))
-         (output (string-trim-right (shell-command-to-string cmd))))
-    (if (equal "" output) nil output)))
-
 
 
 ;; ========================
@@ -145,7 +150,6 @@ string or 't to use the current date and time."
 ;; Posts
 ;; ========================
 
-;;;###autoload
 (defun pelican-new-post-draft (title)
   "Create new rst post draft and open it in a new buffer"
   (interactive "sPost title: ")
@@ -165,8 +169,7 @@ string or 't to use the current date and time."
                   slug)))
     (write-region header nil draft-path)
     (message "Created new rst draft at: %s" draft-path)
-    (find-file draft-path)
-    ))
+    (find-file draft-path)))
 
 
 ;; ========================
