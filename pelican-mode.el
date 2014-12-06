@@ -109,7 +109,7 @@
   (if value (format "%s: %s\n" name value) ""))
 
 
-(defun pelican-rst-header (title date status category tags slug)
+(defun pelican-rst-header (title date status category tags slug summary)
   "Generate a Pelican reStructuredText header.
 
 All parameters but TITLE may be nil to omit them. DATE may be a
@@ -118,15 +118,17 @@ string or 't to use the current date and time."
                        (make-string (string-width title) ?#)
                        title
                        (make-string (string-width title) ?#)))
+        (title-field (pelican-field ":title" title))
         (status (pelican-field ":status" status))
         (category (pelican-field ":category" category))
         (tags (pelican-field ":tags" tags))
         (slug (pelican-field ":slug" slug))
         (date (if date (format ":date: %s\n"
                                (if (stringp date) date
-                                 (pelican-timestamp-now)))
-                "")))
-    (concat title date status tags category slug "\n")))
+                                 (pelican-timestamp-now))) ""))
+        (summary (pelican-field ":summary" summary))
+        )
+    (concat title title-field date status tags category slug summary "\n")))
 
 
 ;; ========================
@@ -182,13 +184,15 @@ string or 't to use the current date and time."
          (draft-path (format "%s/content/%s.rst" (pelican-find-root) slug))
          (category "<CATEGORY>")
          (tags "<TAGS>")
+         (summary "<SUMMARY>")
          (header (pelican-rst-header
                   title
                   (pelican-timestamp-now)
                   "draft"
                   category
                   tags
-                  slug)))
+                  slug
+                  summary)))
     (write-region header nil draft-path)
     (message "Created new rst draft at: %s" draft-path)
     (find-file draft-path)))
