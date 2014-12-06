@@ -179,7 +179,7 @@ string or 't to use the current date and time."
          (conf-content-var (pelican-conf-var "PATH"))
          (content-path (if conf-content-var conf-content-var "output"))
          (slug (s-dashed-words title))
-         (draft-path (format "content/%s.rst" slug))
+         (draft-path (format "%s/content/%s.rst" (pelican-find-root) slug))
          (category "<CATEGORY>")
          (tags "<TAGS>")
          (header (pelican-rst-header
